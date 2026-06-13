@@ -335,8 +335,6 @@ function SectionChevron({
     return (
       <motion.div
         className={className}
-        animate={{ y: isUp ? [0, -6, 0] : [0, 6, 0] }}
-        transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
         aria-hidden="true"
       >
         {content}
@@ -349,8 +347,6 @@ function SectionChevron({
       type="button"
       onClick={onClick}
       className={className}
-      animate={{ y: isUp ? [0, -6, 0] : [0, 6, 0] }}
-      transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
       aria-label={isUp ? "Previous section" : showLabel ? "Scroll to next section" : "Next section"}
     >
       {content}
