@@ -518,7 +518,7 @@ function PhoneMockup({
 }) {
   return (
     <div className="relative h-[clamp(230px,44dvh,430px)] w-[clamp(108.2px,20.7dvh,202.4px)] md:h-[500px] md:w-[234.3px]">
-      <div className="absolute inset-0 overflow-hidden rounded-[clamp(1.25rem,6dvh,2.5rem)] border-4 border-foreground/10 bg-card shadow-2xl md:rounded-[2.5rem]">
+      <div className="absolute inset-0 overflow-hidden rounded-[clamp(0.8rem,3.5dvh,1.5rem)] border-4 border-foreground/10 bg-card shadow-2xl md:rounded-[1.5rem]">
         {imageSrc ? (
           <img
             src={imageSrc}
