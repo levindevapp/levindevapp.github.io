@@ -133,7 +133,7 @@ export default function App() {
 
   return (
     <div
-      className="relative w-full h-screen overflow-hidden bg-background"
+      className="relative w-full h-[100dvh] overflow-hidden bg-background"
       style={{ fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif" }}
     >
       {/* Dot nav */}
@@ -173,13 +173,13 @@ export default function App() {
       {/* Scroll container */}
       <div
         ref={containerRef}
-        className="relative w-full h-screen overflow-y-scroll"
+        className="relative w-full h-[100dvh] overflow-y-scroll"
         style={{ scrollSnapType: "y mandatory", scrollBehavior: "smooth" }}
       >
         <div
           className="pointer-events-none absolute inset-x-0 top-0"
           style={{
-            height: `${SECTIONS.length * 100}vh`,
+            height: `${SECTIONS.length * 100}dvh`,
             background: [
               "radial-gradient(circle at 88% 7%, rgba(14, 165, 233, 0.18), transparent 18%)",
               "radial-gradient(circle at 12% 20%, rgba(56, 189, 248, 0.12), transparent 16%)",
@@ -301,7 +301,7 @@ function PageSection({
     <section
       id={id}
       ref={(el) => { sectionRefs.current[id] = el; }}
-      className="relative z-10 w-full h-screen flex items-center justify-center overflow-hidden"
+      className="relative z-10 flex h-[100dvh] w-full items-center justify-center overflow-hidden"
       style={{ scrollSnapAlign: "start" }}
     >
       {children}
@@ -329,7 +329,7 @@ function SectionChevron({
   );
 
   const className =
-    `absolute ${isUp ? "top-10" : "bottom-10"} left-1/2 z-20 -translate-x-1/2 flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-colors`;
+    `absolute ${isUp ? "top-[clamp(1rem,4.8dvh,2.5rem)]" : "bottom-[clamp(1rem,4.8dvh,2.5rem)]"} left-1/2 z-20 -translate-x-1/2 flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-colors`;
 
   if (!onClick) {
     return (
@@ -360,23 +360,23 @@ function SectionChevron({
 
 function HeroSection() {
   return (
-    <div className="relative w-full h-full flex flex-col items-center justify-center px-6">
+    <div className="relative flex h-full w-full flex-col items-center justify-center px-6 py-[clamp(5rem,14dvh,7rem)]">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="text-center z-10"
+        className="z-10 text-center"
       >
-        <div className="inline-block px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-sm mb-6 tracking-wide">
+        <div className="mb-[clamp(1rem,3dvh,1.5rem)] inline-block rounded-full bg-secondary px-3 py-1 text-[clamp(0.75rem,1.8dvh,0.875rem)] tracking-wide text-secondary-foreground">
           Web Engineer &amp; Indie Developer
         </div>
         <h1
           className="mb-4"
           style={{
-            fontSize: "clamp(3rem, 8vw, 6rem)",
+            fontSize: "clamp(2.5rem, min(8vw, 12dvh), 6rem)",
             fontWeight: 800,
             lineHeight: 1.05,
-            letterSpacing: "-0.03em",
+            letterSpacing: 0,
             color: "var(--foreground)",
           }}
         >
@@ -433,45 +433,51 @@ function AppSection({
   reverse: boolean;
 }) {
   return (
-    <div className="w-full h-full flex items-center justify-center px-8 md:px-20">
+    <div className="flex h-full w-full items-center justify-center px-5 py-[clamp(4.75rem,13dvh,6.5rem)] md:px-20 md:py-0">
       <div
-        className={`w-full max-w-5xl flex flex-col ${reverse ? "md:flex-row-reverse" : "md:flex-row"} items-center gap-12 md:gap-20`}
+        className={`flex max-h-full w-full max-w-5xl flex-col ${reverse ? "md:flex-row-reverse" : "md:flex-row"} items-center gap-[clamp(1.25rem,3.5dvh,2rem)] md:gap-20`}
       >
         <motion.div
-          className="flex-1 text-center md:text-left"
+          className="min-h-0 flex-1 text-center md:text-left"
           initial={{ opacity: 0, x: reverse ? 40 : -40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <div className="flex items-center gap-2 justify-center md:justify-start mb-4">
+          <div className="mb-[clamp(0.35rem,1.3dvh,1rem)] flex items-center justify-center gap-2 md:mb-4 md:justify-start">
             {isPhone ? (
               <Smartphone size={16} className="text-primary" />
             ) : (
               <Globe size={16} className="text-primary" />
             )}
-            <span className="text-xs text-primary tracking-widest uppercase font-semibold">
+            <span className="text-[clamp(0.65rem,1.7dvh,0.75rem)] font-semibold uppercase tracking-widest text-primary">
               {isPhone ? "Mobile App" : "Web App"}
             </span>
           </div>
           <h2
             style={{
-              fontSize: "clamp(2.5rem, 5vw, 4rem)",
+              fontSize: "clamp(1.7rem, min(8.5vw, 7dvh), 4rem)",
               fontWeight: 800,
               lineHeight: 1.05,
-              letterSpacing: "-0.02em",
+              letterSpacing: 0,
               color: "var(--foreground)",
-              marginBottom: "1rem",
+              marginBottom: "clamp(0.45rem, 1.7dvh, 1rem)",
             }}
           >
             {title}
           </h2>
-          <p className="text-muted-foreground leading-relaxed mb-6" style={{ fontSize: "1rem", maxWidth: "30rem" }}>
+          <p
+            className="mx-auto mb-[clamp(0.55rem,2dvh,1.5rem)] max-w-[30rem] text-muted-foreground md:mx-0"
+            style={{
+              fontSize: "clamp(0.78rem, 2.2dvh, 1rem)",
+              lineHeight: 1.55,
+            }}
+          >
             {description}
           </p>
-          <div className="flex flex-wrap gap-2 justify-center md:justify-start">
+          <div className="flex flex-wrap justify-center gap-1.5 md:justify-start md:gap-2">
             {tags.map((tag) => (
-              <span key={tag} className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-medium">
+              <span key={tag} className="rounded-full bg-secondary px-2.5 py-1 text-[clamp(0.65rem,1.7dvh,0.75rem)] font-medium text-secondary-foreground md:px-3">
                 {tag}
               </span>
             ))}
@@ -511,8 +517,8 @@ function PhoneMockup({
   imageSrc?: string;
 }) {
   return (
-    <div className="relative h-[400px] w-[188.3px] md:h-[500px] md:w-[234.3px]">
-      <div className="absolute inset-0 rounded-[2.5rem] border-4 border-foreground/10 bg-card shadow-2xl overflow-hidden">
+    <div className="relative h-[clamp(230px,44dvh,430px)] w-[clamp(108.2px,20.7dvh,202.4px)] md:h-[500px] md:w-[234.3px]">
+      <div className="absolute inset-0 overflow-hidden rounded-[clamp(1.25rem,6dvh,2.5rem)] border-4 border-foreground/10 bg-card shadow-2xl md:rounded-[2.5rem]">
         {imageSrc ? (
           <img
             src={imageSrc}
@@ -549,7 +555,7 @@ function BrowserMockup({
 }) {
   return (
     <div
-      className="relative flex h-[204px] w-[300px] flex-col overflow-hidden rounded-xl border border-border shadow-2xl md:h-[334px] md:w-[540px]"
+      className="relative flex h-auto w-[min(330px,calc(100vw-2.5rem))] aspect-[300/204] flex-col overflow-hidden rounded-[clamp(0.45rem,2.2dvh,0.75rem)] border border-border shadow-2xl md:h-[334px] md:w-[540px] md:aspect-auto md:rounded-xl"
     >
       <div className="flex items-center gap-1.5 border-b border-border bg-card px-3 py-1.5 md:gap-2 md:px-4 md:py-2.5">
         <span className="h-2.5 w-2.5 rounded-full bg-red-400/70 md:h-3 md:w-3" />
@@ -587,7 +593,7 @@ function BrowserMockup({
 
 function AboutSection() {
   return (
-    <div className="w-full h-full flex items-center justify-center px-8">
+    <div className="flex h-full w-full items-center justify-center px-5 py-[clamp(4.75rem,13dvh,6.5rem)] md:px-8 md:py-0">
       <div className="max-w-2xl text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -596,30 +602,33 @@ function AboutSection() {
           transition={{ duration: 0.7 }}
           className="flex flex-col items-center"
         >
-          <span className="text-primary text-xs tracking-widest uppercase font-semibold mb-4 block">About</span>
-          <div className="mb-8 h-32 w-32 overflow-hidden rounded-full border border-border bg-secondary shadow-lg">
+          <span className="mb-[clamp(0.5rem,1.8dvh,1rem)] block text-xs font-semibold uppercase tracking-widest text-primary">About</span>
+          <div className="mb-[clamp(0.8rem,3dvh,2rem)] h-[clamp(72px,18dvh,128px)] w-[clamp(72px,18dvh,128px)] overflow-hidden rounded-full border border-border bg-secondary shadow-lg">
             <img
               src={profileIcon}
               alt="Levin profile icon"
               className="h-full w-full object-cover"
             />
           </div>
-          <p className="text-muted-foreground leading-relaxed mb-8" style={{ fontSize: "1.05rem" }}>
+          <p
+            className="mb-[clamp(0.8rem,3dvh,2rem)] text-muted-foreground"
+            style={{ fontSize: "clamp(0.82rem, 2.2dvh, 1.05rem)", lineHeight: 1.65 }}
+          >
             Webエンジニア / インディー開発者
             <br />
             アイデアを形にすることが好きで、Web、モバイル問わず開発しています。
             <br />
             「日常を少しだけ便利に」を信条としています。
           </p>
-          <dl className="w-full max-w-md rounded-lg border border-border bg-background/70 p-6 text-left shadow-sm">
+          <dl className="w-full max-w-md rounded-lg border border-border bg-background/70 p-[clamp(0.9rem,3dvh,1.5rem)] text-left shadow-sm">
             {[
               { label: "名前", value: "Levin" },
               { label: "好きな技術", value: "TypeScript、Java" },
               { label: "趣味", value: "カードゲーム、カフェ巡り" },
             ].map(({ label, value }) => (
-              <div key={label} className="flex gap-4 border-b border-border py-3 first:pt-0 last:border-b-0 last:pb-0">
-                <dt className="w-24 flex-shrink-0 text-sm font-semibold text-foreground">{label}</dt>
-                <dd className="text-sm text-muted-foreground">{value}</dd>
+              <div key={label} className="flex gap-4 border-b border-border py-[clamp(0.45rem,1.6dvh,0.75rem)] first:pt-0 last:border-b-0 last:pb-0">
+                <dt className="w-24 flex-shrink-0 text-[clamp(0.78rem,2dvh,0.875rem)] font-semibold text-foreground">{label}</dt>
+                <dd className="text-[clamp(0.78rem,2dvh,0.875rem)] text-muted-foreground">{value}</dd>
               </div>
             ))}
           </dl>
@@ -661,21 +670,21 @@ const SKILLS: {
 
 function SkillsSection() {
   return (
-    <div className="w-full h-full flex items-center justify-center px-8">
+    <div className="flex h-full w-full items-center justify-center px-5 py-[clamp(4.75rem,13dvh,6.5rem)] md:px-8 md:py-0">
       <div className="max-w-4xl w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-10"
+          className="mb-[clamp(0.8rem,3dvh,2.5rem)] text-center"
         >
-          <span className="text-primary text-xs tracking-widest uppercase font-semibold mb-4 block">Skills</span>
-          <h2 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 800, lineHeight: 1.1, letterSpacing: "-0.02em" }}>
+          <span className="mb-[clamp(0.4rem,1.5dvh,1rem)] block text-xs font-semibold uppercase tracking-widest text-primary">Skills</span>
+          <h2 style={{ fontSize: "clamp(1.6rem, min(7vw, 6dvh), 3rem)", fontWeight: 800, lineHeight: 1.1, letterSpacing: 0 }}>
             技術スタック
           </h2>
         </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-[clamp(0.5rem,1.8dvh,1rem)] md:grid-cols-3 md:gap-4">
           {SKILLS.map(({ category, items }, i) => (
             <motion.div
               key={category}
@@ -683,18 +692,18 @@ function SkillsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="bg-card rounded-xl p-5 border border-border hover:border-primary/30 transition-colors"
+              className="rounded-xl border border-border bg-card p-[clamp(0.7rem,2.3dvh,1.25rem)] transition-colors hover:border-primary/30"
             >
-              <div className="mb-4">
-                <span className="font-semibold text-sm">{category}</span>
+              <div className="mb-[clamp(0.4rem,1.5dvh,1rem)]">
+                <span className="text-[clamp(0.78rem,2dvh,0.875rem)] font-semibold">{category}</span>
               </div>
-              <ul className="grid grid-cols-2 gap-2 md:grid-cols-1">
+              <ul className="grid grid-cols-2 gap-1.5 md:grid-cols-1 md:gap-2">
                 {items.map(({ name, icon: Icon, color }) => (
                   <li
                     key={name}
-                    className="min-w-0 flex items-center gap-2 rounded-lg border border-border/70 bg-secondary/40 px-2 py-2 text-xs font-medium text-foreground"
+                    className="flex min-w-0 items-center gap-2 rounded-lg border border-border/70 bg-secondary/40 px-2 py-[clamp(0.35rem,1.2dvh,0.5rem)] text-[clamp(0.68rem,1.7dvh,0.75rem)] font-medium text-foreground"
                   >
-                    <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-background">
+                    <span className="flex h-[clamp(1.4rem,4dvh,1.75rem)] w-[clamp(1.4rem,4dvh,1.75rem)] flex-shrink-0 items-center justify-center rounded-md bg-background">
                       <Icon size={16} color={color} aria-hidden="true" />
                     </span>
                     <span className="min-w-0 break-words">{name}</span>
@@ -732,7 +741,7 @@ function ContactSection() {
   ];
 
   return (
-    <div className="w-full h-full flex items-center justify-center px-8">
+    <div className="flex h-full w-full items-center justify-center px-5 py-[clamp(4.75rem,13dvh,6.5rem)] md:px-8 md:py-0">
       <div className="max-w-lg w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -740,14 +749,14 @@ function ContactSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="text-center mb-8">
-            <span className="text-primary text-xs tracking-widest uppercase font-semibold mb-4 block">Contact</span>
+          <div className="mb-[clamp(0.9rem,3dvh,2rem)] text-center">
+            <span className="mb-[clamp(0.4rem,1.5dvh,1rem)] block text-xs font-semibold uppercase tracking-widest text-primary">Contact</span>
             <h2
               style={{
-                fontSize: "clamp(2rem, 4vw, 3rem)",
+                fontSize: "clamp(1.6rem, min(7vw, 6dvh), 3rem)",
                 fontWeight: 800,
                 lineHeight: 1.1,
-                letterSpacing: "-0.02em",
+                letterSpacing: 0,
                 marginBottom: "0.75rem",
               }}
             >
@@ -755,7 +764,7 @@ function ContactSection() {
             </h2>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-[clamp(0.5rem,1.8dvh,0.75rem)]">
             {contactLinks.map(({ icon, label, value, href }, i) => (
               <motion.div
                 key={label}
@@ -768,16 +777,16 @@ function ContactSection() {
                   href={href}
                   target={href.startsWith("http") ? "_blank" : undefined}
                   rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="flex items-center gap-4 rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-secondary"
+                  className="flex items-center gap-3 rounded-xl border border-border bg-card p-[clamp(0.75rem,2.4dvh,1rem)] transition-colors hover:border-primary/40 hover:bg-secondary md:gap-4"
                 >
-                  <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-secondary text-primary">
+                  <span className="flex h-[clamp(2.25rem,6dvh,2.75rem)] w-[clamp(2.25rem,6dvh,2.75rem)] flex-shrink-0 items-center justify-center rounded-full bg-secondary text-primary">
                     {icon}
                   </span>
                   <span className="min-w-0">
                     <span className="block text-xs font-semibold uppercase tracking-widest text-muted-foreground">
                       {label}
                     </span>
-                    <span className="block break-all text-sm font-semibold text-foreground">{value}</span>
+                    <span className="block break-all text-[clamp(0.78rem,2dvh,0.875rem)] font-semibold text-foreground">{value}</span>
                   </span>
                 </a>
               </motion.div>
