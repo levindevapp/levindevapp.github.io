@@ -360,7 +360,7 @@ function SectionChevron({
 
 function HeroSection() {
   return (
-    <div className="relative flex h-full w-full flex-col items-center justify-center px-6 py-[clamp(5rem,14dvh,7rem)]">
+    <div className="relative flex h-full w-full flex-col items-center justify-center px-8 py-[clamp(5rem,14dvh,7rem)] sm:px-6">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -433,7 +433,7 @@ function AppSection({
   reverse: boolean;
 }) {
   return (
-    <div className="flex h-full w-full items-center justify-center px-5 py-[clamp(4.75rem,13dvh,6.5rem)] md:px-20 md:py-0">
+    <div className="flex h-full w-full items-center justify-center px-8 py-[clamp(4.75rem,13dvh,6.5rem)] sm:px-5 md:px-20 md:py-0">
       <div
         className={`flex max-h-full w-full max-w-5xl flex-col ${reverse ? "md:flex-row-reverse" : "md:flex-row"} items-center gap-[clamp(1.25rem,3.5dvh,2rem)] md:gap-20`}
       >
@@ -555,7 +555,7 @@ function BrowserMockup({
 }) {
   return (
     <div
-      className="relative flex h-auto w-[min(330px,calc(100vw-2.5rem))] aspect-[300/204] flex-col overflow-hidden rounded-[clamp(0.45rem,2.2dvh,0.75rem)] border border-border shadow-2xl md:h-[334px] md:w-[540px] md:aspect-auto md:rounded-xl"
+      className="relative flex h-auto w-[min(330px,calc(100vw-4rem))] aspect-[300/204] flex-col overflow-hidden rounded-[clamp(0.45rem,2.2dvh,0.75rem)] border border-border shadow-2xl sm:w-[min(330px,calc(100vw-2.5rem))] md:h-[334px] md:w-[540px] md:aspect-auto md:rounded-xl"
     >
       <div className="flex items-center gap-1.5 border-b border-border bg-card px-3 py-1.5 md:gap-2 md:px-4 md:py-2.5">
         <span className="h-2.5 w-2.5 rounded-full bg-red-400/70 md:h-3 md:w-3" />
@@ -593,7 +593,7 @@ function BrowserMockup({
 
 function AboutSection() {
   return (
-    <div className="flex h-full w-full items-center justify-center px-5 py-[clamp(4.75rem,13dvh,6.5rem)] md:px-8 md:py-0">
+    <div className="flex h-full w-full items-center justify-center px-8 py-[clamp(4.75rem,13dvh,6.5rem)] sm:px-5 md:px-8 md:py-0">
       <div className="max-w-2xl text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -670,7 +670,7 @@ const SKILLS: {
 
 function SkillsSection() {
   return (
-    <div className="flex h-full w-full items-center justify-center px-5 py-[clamp(4.75rem,13dvh,6.5rem)] md:px-8 md:py-0">
+    <div className="flex h-full w-full items-center justify-center px-8 py-[clamp(4.75rem,13dvh,6.5rem)] sm:px-5 md:px-8 md:py-0">
       <div className="max-w-4xl w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -741,7 +741,7 @@ function ContactSection() {
   ];
 
   return (
-    <div className="flex h-full w-full items-center justify-center px-5 py-[clamp(4.75rem,13dvh,6.5rem)] md:px-8 md:py-0">
+    <div className="flex h-full w-full items-center justify-center px-8 py-[clamp(4.75rem,13dvh,6.5rem)] sm:px-5 md:px-8 md:py-0">
       <div className="max-w-lg w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
